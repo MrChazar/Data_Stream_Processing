@@ -14,12 +14,11 @@ def load_image(path):
 def save_image(image):
     cv2.imwrite("image.png", image)
 
-def zad_1():
+def zad_1(path = "pictures/image.png"):
     """
     Zad. 1 Korzystając z jednej z dostępnych bibliotek (np. OpenCV) przygotuj kod w języku Python,
     który załaduje a następnie zapisze wybrany obraz z/na dysku.
     """
-    path = "pictures/image.png"
     image = load_image(path)
     save_image(image)
 
@@ -111,4 +110,4 @@ def zad_5(path="pictures/image.png"):
 
 
 if __name__ == "__main__":
-    zad_5()
+    zad_3()
