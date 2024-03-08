@@ -8,6 +8,7 @@ import scipy as scp
 def load_image(path):
     image = cv2.imread(path)
     #cv2.imshow('image.png', image)
+
     #cv2.waitKey(0)  # Dodaj to aby okno z obrazem zostało pokazane
     return image
 
@@ -76,6 +77,7 @@ def zad_5(path="pictures/image.png"):
     Dla każdego z tych szumów przygotuj histogram. W tym celu wykorzystaj odpowiednie
     biblioteki w języku Python.
     """
+
     image = load_image(path)
 
     fig, ax = plt.subplots(4)
@@ -110,4 +112,8 @@ def zad_5(path="pictures/image.png"):
 
 
 if __name__ == "__main__":
-    zad_3()
+    #zad_1()
+    #zad_2()
+    #zad_3()
+    #zad_4()
+    zad_5()

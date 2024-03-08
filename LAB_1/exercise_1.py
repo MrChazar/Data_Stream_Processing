@@ -14,12 +14,28 @@ Zadanie dodatkowe: wygenerowane sygnały wyświetl w uporządkowany sposób korz
 funkcji subplot. 
 """
 
+def sin(f, t):
+    return np.sin(2*np.pi*f*t)
+
+
+def signal_square(f, t):
+    return scp.signal.square(2*np.pi*f*t)
+
+
+def signal_sawtooth(f, t):
+    return scp.signal.sawtooth(2*np.pi*f*t)
+
+
+def signal_chirp(f0, f1, t, T):
+    return scp.signal.chirp(t, f0, T, f1)
+
+
+def super_position(f, t):
+    return np.sin(2*np.pi*f*t) + np.cos(2*np.pi*2*f*t)
+
+
 # wykres rozmiar
 plt.rcParams["figure.figsize"] = (18, 10)
-
-# wykres
-fig, ax = plt.subplots(6)
-fig.suptitle('Wykresy sygnałów')
 
 # paramettry
 fs = 1000  # Częstotliwość próbkowania
@@ -29,38 +45,29 @@ f = 5 # częstotliwość sygnału
 
 # generowanie sygnału
 # sinus
-y = np.sin(2*np.pi*f*t)
-ax[0].plot(t, y)
-ax[0].set_title('sinus')
+y = sin(f, t)
+
 
 # prostokąt
-y = scp.signal.square(2*np.pi*f*t)
-ax[1].plot(t, y)
-ax[1].set_title('prostokąt')
+y = signal_square(f,t)
 
 # piłokształtny
-y = scp.signal.sawtooth(2*np.pi*f*t)
-ax[2].plot(t, y)
-ax[2].set_title('piłokształtny')
+y = signal_sawtooth(f, t)
+
 
 # świergotliwy
 f0 = 1
 f1 = 100
-y = scp.signal.chirp(t, f0, T, f1)
-ax[3].plot(t, y)
-ax[3].set_title('świergotliwy')
+y = signal_chirp(f0, f1, t, T)
+
 
 # Superpozycja funkcji sinus i cosinus z samodzielnie dobranymi parametrami
 y = np.sin(2*np.pi*f*t) + np.cos(2*np.pi*2*f*t)
-ax[4].plot(t, y)
-ax[4].set_title('superpozycja sinus i cosinus')
+
+
 
 # Impuls jednostkowy
 y = scp.signal.unit_impulse(t.shape, idx='mid')
-ax[5].plot(t, y)
-ax[5].set_title('impuls jednostkowy')
 
-plt.tight_layout()
-plt.show()
 
 
