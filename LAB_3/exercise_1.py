@@ -2,6 +2,7 @@ import scipy as scp
 import numpy as np
 import LAB_1.exercise_1 as ex1
 import matplotlib.pyplot as plt
+
 """
 Zad. 1 Dla sygnałów z zadania 1 z listy 1 napisz kod w języku Python, który wyznaczy dla
 nich widmową gęstość mocy. W tym celu wykorzystaj metody: periodogram i welcha.
