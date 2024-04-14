@@ -16,31 +16,33 @@ def sinc_interp(t, y, t_interp):
         y_interp[i] = np.sum(y * np.sinc((t_interp[i] - t) / (t[1] - t[0])))
     return y_interp
 
-# Generowanie punktów
-t, y = ex1.sinusoid(1, 10, 1)
+t, y = ex1.sinusoid(5, 100, 1)
 
-# Interpolacja sinc
-t_interp = np.linspace(0, 1, 100)
+t_interp = np.linspace(0, 1, 1000)
 y_interp_sinc = sinc_interp(t, y, t_interp)
 
-# Wyświetlanie interpolacji sinc
-plt.scatter(t, y, c='r', label='Punkty')
-plt.plot(t_interp, y_interp_sinc, c='b', label='Interpolacja sinc')
-plt.title('Interpolacja sinc')
-plt.xlabel('t')
-plt.ylabel('y')
-plt.legend()
+t_high_res, y_high_res = ex1.sinusoid(1, 1000, 1)  # 1000 Hz to wysoka częstotliwość próbkowania
 
+y_high_interp = np.interp(t_interp, t_high_res, y_high_res)
 
 # Obliczanie błędu interpolacji
-error_sinc = np.sum(np.abs(y_interp_sinc - t_interp))
-print(f'Błąd interpolacji sinc: {error_sinc}')
+error_sinc = np.abs(y_interp_sinc - y_high_interp)
+print(f"Błąd interpolacji wynosi: {np.mean(error_sinc)}")
 
-# wizuwalizacja błędu interpolacji
-plt.scatter(t_interp, np.abs(y_interp_sinc - t_interp), label='Błąd interpolacji sinc')
-plt.title('Błąd interpolacji sinc')
-plt.xlabel('t')
-plt.ylabel('y')
-plt.show()
-plt.show()
+fig, ax = plt.subplots(2, 1, figsize=(12, 10))
 
+ax[0].scatter(t, y, c='r', label='Punkty oryginalne')
+ax[0].plot(t_interp, y_interp_sinc, c='b', label='Interpolacja sinc')
+ax[0].set_title('Interpolacja sinc')
+ax[0].set_xlabel('Czas [s]')
+ax[0].set_ylabel('Amplituda')
+ax[0].legend()
+
+ax[1].plot(t_interp, error_sinc, label='Błąd interpolacji sinc', color='orange')
+ax[1].set_title('Błąd interpolacji sinc')
+ax[1].set_xlabel('Czas [s]')
+ax[1].set_ylabel('Błąd')
+ax[1].legend()
+
+plt.tight_layout()
+plt.show()

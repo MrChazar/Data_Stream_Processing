@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy as scp
 import LAB_1.exercise_1 as ex1
+
 """
 Zad. 5 Przygotuj w Pythonie kod, który wyznaczy obwiednie dla sygnału świergotliwego (chirp
 signal)

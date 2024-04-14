@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy as scp
 import LAB_1.exercise_1 as ex1
+
 """
 Zad. 3 Przygotuj w Pythonie kod, który wyznaczy widmo amplitudowe sygnałów z zadania 1
 na liście 1.
@@ -13,6 +14,7 @@ def amplitude_spectrum(t, y):
     fft_vals = np.fft.fft(y)
     amplitude = np.abs(fft_vals) / N
     return freqs, amplitude
+
 
 # Parametry Sygałów
 fs = 1000  # Częstotliwość próbkowania
@@ -48,15 +50,34 @@ fig, ax = plt.subplots(3, 2)
 fig.suptitle('Widmo amplitudowe')
 ax[0][0].plot(freqs_sin, amplitude_sin)
 ax[0][0].set_title('sinus')
+ax[0][0].set_xlabel('F')
+ax[0][0].set_ylabel('A')
+
 ax[0][1].plot(freqs_square, amplitude_square)
 ax[0][1].set_title('prostokątny')
+ax[0][1].set_xlabel('F')
+ax[0][1].set_ylabel('A')
+
 ax[1][0].plot(freqs_sawtooth, amplitude_sawtooth)
 ax[1][0].set_title('piłokształtny')
+ax[1][0].set_xlabel('F')
+ax[1][0].set_ylabel('A')
+
 ax[1][1].plot(freqs_chirp, amplitude_chirp)
 ax[1][1].set_title('świergotliwy')
+ax[1][1].set_xlabel('F')
+ax[1][1].set_ylabel('A')
+
 ax[2][0].plot(freqs_super_position, amplitude_super_position)
 ax[2][0].set_title('superpozycja')
+ax[2][0].set_xlabel('F')
+ax[2][0].set_ylabel('A')
+
 ax[2][1].plot(freqs_impulse, amplitude_impulse)
 ax[2][1].set_title('impuls jednostkowy')
+ax[2][1].set_xlabel('F')
+ax[2][1].set_ylabel('A')
+
+plt.tight_layout()
 plt.show()
 
