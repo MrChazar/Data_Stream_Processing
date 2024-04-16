@@ -31,11 +31,11 @@ def plot_wavelets():
 
             t = np.linspace(0, 1, len(wavelet_function[0]))
 
-            ax[i].plot(t, wavelet_function[0], label="Approximation")
-            ax[i].plot(t, wavelet_function[1], label="Detail")
-            ax[i].set_title(f"{wt.upper()} Wavelet")
-            ax[i].set_xlabel("Time")
-            ax[i].set_ylabel("Amplitude")
+            ax[i].plot(t, wavelet_function[0], label="Aproksymacja")
+            ax[i].plot(t, wavelet_function[1], label="Szczegół")
+            ax[i].set_title(f"{wt.upper()} Falka")
+            ax[i].set_xlabel("Czas")
+            ax[i].set_ylabel("Amplituda")
             ax[i].legend()
             ax[i].grid(True)
 

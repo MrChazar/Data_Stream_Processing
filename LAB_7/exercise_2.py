@@ -22,11 +22,11 @@ def plot_daubechies_wavelets():
                 wavelet_function = wavelet.wavefun(level=scale)
                 t = np.linspace(0, 1, len(wavelet_function[0]))
 
-                axes[i, j].plot(t, wavelet_function[0], label="Approximation")
-                axes[i, j].plot(t, wavelet_function[1], label="Detail")
+                axes[i, j].plot(t, wavelet_function[0], label="Aproksymacja")
+                axes[i, j].plot(t, wavelet_function[1], label="Detale")
                 axes[i, j].set_title(f"{wavelet_name} (Skala={scale})")
-                axes[i, j].set_xlabel("Time")
-                axes[i, j].set_ylabel("Amplitude")
+                axes[i, j].set_xlabel("Czas")
+                axes[i, j].set_ylabel("Amplituda")
                 axes[i, j].legend()
                 axes[i, j].grid(True)
 

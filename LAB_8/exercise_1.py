@@ -2,6 +2,7 @@
 Zad. 1 Przygotuj kod w Pythonie, który wygeneruje spektrogramy dla sygnałów z zadania 1
 na liście 1.
 """
+
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.signal import spectrogram
@@ -24,14 +25,13 @@ def update(val):
     y_chir = ex1.signal_chirp(f0, f1, t, T)
     y_sup = np.sin(2 * np.pi * f * t) + np.cos(2 * np.pi * 2 * f * t)
 
-    signals = [y_sin, y_squ, y_saw, y_chir, y_sup, y_imp]
+    signals = [y_sin, y_squ, y_saw, y_chir, y_sup]
 
     for i, signal in enumerate(signals):
         f, t_spec, Sxx = spectrogram(signal, fs)
         axes[i].cla()
         axes[i].pcolormesh(t_spec, f, 10 * np.log10(Sxx), shading='gouraud')
         axes[i].set_ylabel('Frequency [Hz]')
-        axes[i].set_xlabel('Time [sec]')
         axes[i].set_title(signal_titles[i])
 
     fig.canvas.draw_idle()
@@ -45,30 +45,27 @@ f0 = 1
 f1 = 100
 y_chir = ex1.signal_chirp(f0, f1, t, T)
 y_sup = np.sin(2 * np.pi * initial_freq * t) + np.cos(2 * np.pi * 2 * initial_freq * t)
-y_imp = ex1.scp.signal.unit_impulse(len(t), idx=len(t) // 2)
 
 # Tytuły dla spektrogramów
-signal_titles = ['Sinus', 'Square', 'Sawtooth', 'Chirp', 'Super pozycja', 'Impuls Jednostkowy']
+signal_titles = ['Sinus', 'Square', 'Sawtooth', 'Chirp', 'Super pozycja']
 
 # Tworzenie subplots dla spektrogramów
-fig, axes = plt.subplots(6, 1, figsize=(18, 12))
+fig, axes = plt.subplots(5, 1, figsize=(14, 10))
 
 # Plot initial spectrograms
-signals = [y_sin, y_squ, y_saw, y_chir, y_sup, y_imp]
+signals = [y_sin, y_squ, y_saw, y_chir, y_sup]
 for i, signal in enumerate(signals):
     f, t_spec, Sxx = spectrogram(signal, fs)
     axes[i].pcolormesh(t_spec, f, 10 * np.log10(Sxx), shading='gouraud')
     axes[i].set_ylabel('Frequency [Hz]')
-    axes[i].set_xlabel('Time [sec]')
     axes[i].set_title(signal_titles[i])
-    plt.tight_layout()
+
 
 # Add frequency slider
-axfreq = plt.axes([0.25, 0.01, 0.50, 0.03], facecolor='lightgoldenrodyellow')
+axfreq = plt.axes([0.25, 0.0001, 0.50, 0.03], facecolor='lightgoldenrodyellow')
 sfreq = Slider(axfreq, 'Frequency', 1, 100, valinit=initial_freq)
 sfreq.on_changed(update)
 
-plt.tight_layout()
 plt.tight_layout()
 plt.show()
 

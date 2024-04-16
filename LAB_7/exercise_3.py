@@ -40,38 +40,33 @@ signal = chirp(t, f0=initial_f0, f1=initial_f1, t1=1, method='linear')
 wavelet_names = ['db1', 'sym2', 'coif1']
 num_levels = 5  # Liczba poziomów dekompozycji
 
-fig, axes = plt.subplots(len(wavelet_names) + 1, 1, figsize=(10, 12))
-plt.subplots_adjust(bottom=0.25)
+fig, axes = plt.subplots(len(wavelet_names) + 1, 1, figsize=(10, 15))  # Zwiększenie wysokości figury
+plt.subplots_adjust(bottom=0.3, hspace=0.5)  # Dostosowanie odstępów między subplotami
 
 # Wyświetlanie oryginalnego sygnału
-line0, = axes[0].plot(t, signal, label="Oryginalny Sygnał")
+line0 = axes[0].plot(t, signal, label="Oryginalny Sygnał")
 axes[0].set_title("Oryginalny Chirp Sygnał")
-axes[0].set_xlabel("Time")
-axes[0].set_ylabel("Amplitude")
+axes[0].set_ylabel("Amplituda")
 axes[0].legend()
-axes[0].grid(True)
 
 lines = []
 # Dekompozycja sygnału za pomocą różnych falek
 for i, wavelet_name in enumerate(wavelet_names, start=1):
     wavelet = pywt.Wavelet(wavelet_name)
     coeffs = pywt.wavedec(signal, wavelet, level=num_levels)
-    reconstructed_signal = pywt.waverec(coeffs, wavelet)
-    line, = axes[i].plot(t, reconstructed_signal, label=f"{wavelet_name.capitalize()} Dekopomonowany")
-    lines.append(line)
+    #reconstructed_signal = pywt.waverec(coeffs, wavelet)
+    axes[i].plot(coeffs)
+    axes[i].set_ylabel("Amplituda")
     axes[i].set_title(f"{wavelet_name.capitalize()} Dekomponowany sygnał")
-    axes[i].set_xlabel("Time")
-    axes[i].set_ylabel("Amplitude")
     axes[i].legend()
-    axes[i].grid(True)
 
 # Dodanie sliderów
 axcolor = 'lightgoldenrodyellow'
 axf0 = plt.axes([0.25, 0.1, 0.65, 0.03], facecolor=axcolor)
 axf1 = plt.axes([0.25, 0.05, 0.65, 0.03], facecolor=axcolor)
 
-sf0 = Slider(axf0, 'F0', 0.1, 30.0, valinit=initial_f0)
-sf1 = Slider(axf1, 'F1', 20.0, 200.0, valinit=initial_f1)
+sf0 = Slider(axf0, 'Czas', 0.1, 30.0, valinit=initial_f0)
+sf1 = Slider(axf1, 'Amplituda', 20.0, 200.0, valinit=initial_f1)
 
 sf0.on_changed(update)
 sf1.on_changed(update)
