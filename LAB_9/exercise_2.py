@@ -1,14 +1,17 @@
 """
-Zad. 1 Przygotuj kod w Pythonie, które wyznacza wartości następujących miar jakości
-sygnałów:
-
-gdzie: s to sygnał, n to szum, smax to maksymalna wartość sygnału, y to sygnał z zakłóceniem
+Zad. 2 Przygotuj kod w Pythonie, który pozwoli na porównanie wartości miar SNR, PSNR, MSE
+przygotowanych w zadaniu 1 oraz z gotowych implementacji dostępnych w języku Python.
 """
+
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib
 import LAB_1.exercise_1 as ex1
 from matplotlib.widgets import Slider
+import scipy as scp
+from skimage.metrics import peak_signal_noise_ratio as psnr
+from skimage.metrics import mean_squared_error as mse
+
 matplotlib.use('TkAgg')
 
 
@@ -52,7 +55,13 @@ def update(val):
     ax[0].legend()
 
     ax[1].clear()
-    ax[1].text(0.5, 0.5, f"SNR: {SNR(added_sign, noise)}\nPSNR: {PSNR(added_sign, noise)}\nMSE: {MSE(added_sign, noise)}",
+    ax[1].text(0.25, 0.25, f"Metody zaimplementowane z bibliotek:\n SNR: {SNR(added_sign, noise)}\nPSNR: {PSNR(added_sign, noise)}\nMSE: {MSE(added_sign, noise)}",
+               horizontalalignment='center', verticalalignment='center', fontsize=12)
+    snr_value = np.mean(np.abs(added_sign)) / np.mean(np.abs(noise))
+    psnr_value = psnr(added_sign, added_sign - noise, data_range=1000)
+    mse_value = mse(added_sign, added_sign - noise)
+    ax[1].text(0.6, 0.25,
+               f"Metody zaimplementowane samemu:\nSNR: {snr_value}\nPSNR: {psnr_value}\nMSE: {mse_value}",
                horizontalalignment='center', verticalalignment='center', fontsize=12)
     plt.draw()
 
