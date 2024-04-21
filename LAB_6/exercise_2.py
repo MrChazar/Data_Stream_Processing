@@ -43,6 +43,8 @@ def update(val):
     for line, signal_data in zip(lines, signals):
         line.set_ydata(np.sin(2 * np.pi * freq * t) * window_func(N))
     fig.canvas.draw_idle()
+    ax.set_xlim(-1, 1)
+    ax.set_ylim(-10, 10)
 
 # Tworzenie wykresu
 fig, ax = plt.subplots()
@@ -52,7 +54,7 @@ ax.set_ylabel('Amplituda')
 ax.set_title('Widmo sygnału sinusoidalnego z różnymi oknami')
 
 # Dodanie suwaków
-axfreq = plt.axes([0.1, 0.1, 0.65, 0.03], facecolor='lightgoldenrodyellow')
+axfreq = plt.axes([0.2, 0.1, 0.65, 0.03], facecolor='lightgoldenrodyellow')
 freq_slider = Slider(axfreq, 'Częstotliwość [Hz]', 10, 1000, valinit=frequencies[0])
 
 # Dodanie linii na wykresie dla każdego okna

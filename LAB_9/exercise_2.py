@@ -55,13 +55,16 @@ def update(val):
     ax[0].legend()
 
     ax[1].clear()
-    ax[1].text(0.25, 0.25, f"Metody zaimplementowane z bibliotek:\n SNR: {SNR(added_sign, noise)}\nPSNR: {PSNR(added_sign, noise)}\nMSE: {MSE(added_sign, noise)}",
-               horizontalalignment='center', verticalalignment='center', fontsize=12)
-    snr_value = np.mean(np.abs(added_sign)) / np.mean(np.abs(noise))
     psnr_value = psnr(added_sign, added_sign - noise, data_range=1000)
+    snr_value = np.mean(np.abs(added_sign)) / np.mean(np.abs(noise))
     mse_value = mse(added_sign, added_sign - noise)
+    ax[1].text(0.25, 0.25, f"Metody zaimplementowane z bibliotek:\n SNR: {SNR(added_sign, noise)}\nPSNR: {psnr_value/10}\nMSE: {MSE(added_sign, noise)}",
+               horizontalalignment='center', verticalalignment='center', fontsize=12)
+
+
+
     ax[1].text(0.6, 0.25,
-               f"Metody zaimplementowane samemu:\nSNR: {snr_value}\nPSNR: {psnr_value}\nMSE: {mse_value}",
+               f"Metody zaimplementowane samemu:\nSNR: {snr_value}\nPSNR: {PSNR(added_sign, noise)}\nMSE: {mse_value}",
                horizontalalignment='center', verticalalignment='center', fontsize=12)
     plt.draw()
 

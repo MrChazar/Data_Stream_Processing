@@ -7,6 +7,8 @@ rozwiązania zadania można wykorzystać pakiet pywt
 import numpy as np
 import matplotlib.pyplot as plt
 import pywt
+import matplotlib
+matplotlib.use('TkAgg')
 
 
 def sinusoid(f, fs, T=1):
@@ -34,7 +36,6 @@ def plot_wavelets():
             ax[i].plot(t, wavelet_function[0], label="Aproksymacja")
             ax[i].plot(t, wavelet_function[1], label="Szczegół")
             ax[i].set_title(f"{wt.upper()} Falka")
-            ax[i].set_xlabel("Czas")
             ax[i].set_ylabel("Amplituda")
             ax[i].legend()
             ax[i].grid(True)

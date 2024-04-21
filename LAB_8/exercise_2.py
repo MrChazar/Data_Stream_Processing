@@ -26,7 +26,6 @@ y = scp.signal.chirp(t, fs, T, f)
 fig, ax = plt.subplots(3, 1, figsize=(12, 10))
 
 ax[0].plot(t, y)
-ax[0].set_xlabel('Częstotliwość [Hz]')
 ax[0].set_ylabel('Amplituda')
 ax[0].set_title('Sygnał Superpozycji')
 

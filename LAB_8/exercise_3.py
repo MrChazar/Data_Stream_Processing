@@ -21,14 +21,12 @@ y = np.sin(2*np.pi*f*t) + np.cos(2*np.pi*2*f*t) + np.sin(2*np.pi*f*t*3) + np.cos
 fig, ax = plt.subplots(3, 1, figsize=(12, 10))
 
 ax[0].plot(t, y)
-ax[0].set_xlabel('Częstotliwość [Hz]')
 ax[0].set_ylabel('Amplituda')
 ax[0].set_title('Sygnał Superpozycji')
 
 # Dekompozycja sygnału za pomocą EMD
 imfs = emd.sift.sift(y)
 ax[1].plot(imfs)
-ax[1].set_xlabel('Częstotliwość [Hz]')
 ax[1].set_ylabel('Amplituda')
 ax[1].set_title('Dekomponwany sygnał')
 

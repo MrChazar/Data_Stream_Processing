@@ -6,6 +6,8 @@ db2, itd.) i dla różnych parametrów.
 import numpy as np
 import matplotlib.pyplot as plt
 import pywt
+import matplotlib
+matplotlib.use('TkAgg')
 
 def plot_daubechies_wavelets():
     wavelet_family = 'db'

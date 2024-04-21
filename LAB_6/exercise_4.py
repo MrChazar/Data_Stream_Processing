@@ -20,7 +20,7 @@ def amplitude_spectrum(t, y):
     amplitude = np.abs(fft_vals) / N
     return freqs, amplitude
 
-data = yf.download("META", start='2023-01-01', end='2024-01-01')
+data = yf.download("META", start='2021-01-01', end='2024-01-01')
 
 y = data['Close'].values
 t = np.arange(len(y))

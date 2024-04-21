@@ -21,14 +21,12 @@ fs = 1 / delta_t
 fig, ax = plt.subplots(3, 1, figsize=(12, 10))
 
 ax[0].plot(t, y)
-ax[0].set_xlabel('Częstotliwość [Hz]')
 ax[0].set_ylabel('Amplituda')
 ax[0].set_title('Ceny akcji spółki "Meta"')
 
 # Dekompozycja sygnału za pomocą EMD
 imfs = emd.sift.sift(y)
 ax[1].plot(imfs)
-ax[1].set_xlabel('Częstotliwość [Hz]')
 ax[1].set_ylabel('Amplituda')
 ax[1].set_title('Dekomponwany sygnał')
 
